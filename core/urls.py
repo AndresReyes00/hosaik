@@ -8,6 +8,7 @@ urlpatterns = [
     path("", include("my_apps.hosaik.urls")),
     path("portafolios/", include("my_apps.portafolios.urls")),
     path("accounts/", include("my_apps.accounts.urls")),
+    path("tasker/", include("my_apps.tasker.urls")),
 ]
 
 

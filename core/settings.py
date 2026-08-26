@@ -27,6 +27,7 @@ MY_APPS = [
     "my_apps.hosaik.apps.HosaikConfig",
     "my_apps.portafolios.apps.PortafoliosConfig",
     "my_apps.accounts.apps.AccountsConfig",
+    "my_apps.tasker.apps.TaskerConfig",
 ]
 
 

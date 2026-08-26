@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Create Task | Taskedo
+{% endblock %}
+
+{% block content %}
+  <div class="container py-4 py-md-5">
+    <!-- ===================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ===================================================== -->
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-xl-10">
+        <div class="d-flex align-items-center justify-content-between gap-3">
+          <div>
+            <a href="{% url 'tasker:list' %}" class="btn btn-sm btn-outline-secondary mb-3">
+              <i class="bi bi-arrow-left me-1"></i>
+
+              Back to tasks
+            </a>
+
+            <h1 class="fw-bold mb-1">Create task</h1>
+
+            <p class="text-body-secondary mb-0">Turn an idea into something you can accomplish.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
+
+    <div class="row justify-content-center g-4">
+      <!-- ================================================= -->
+      <!-- FORM -->
+      <!-- ================================================= -->
+
+      <div class="col-12 col-xl-7">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4 p-md-5">
+            <!-- Card header -->
+
+            <div class="mb-4">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="bg-primary-subtle text-primary rounded-3 p-2"><i class="bi bi-check2-square fs-5"></i></span>
+
+                <h5 class="fw-bold mb-0">Task details</h5>
+              </div>
+
+              <p class="small text-body-secondary mb-0">Give your task enough context to make the next action clear.</p>
+            </div>
+
+            <!-- ================================================= -->
+            <!-- FORM -->
+            <!-- ================================================= -->
+
+            <form method="post">
+              {% csrf_token %}
+
+              <!-- ================================================= -->
+              <!-- FORM ERRORS -->
+              <!-- ================================================= -->
+
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                  <div class="d-flex gap-2">
+                    <i class="bi bi-exclamation-circle"></i>
+
+                    <div>
+                      {% for error in form.non_field_errors %}
+                        <div>{{ error }}</div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              <!-- ================================================= -->
+              <!-- TITLE -->
+              <!-- ================================================= -->
+
+              <div class="mb-4">
+                <label for="{{ form.title.id_for_label }}" class="form-label fw-semibold">What needs to be done?</label>
+
+                {{ form.title }}
+
+                <div class="form-text">Keep it short and action-oriented.</div>
+
+                {% for error in form.title.errors %}
+                  <div class="text-danger small mt-1">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <!-- ================================================= -->
+              <!-- DESCRIPTION -->
+              <!-- ================================================= -->
+
+              <div class="mb-4">
+                <label for="{{ form.description.id_for_label }}" class="form-label fw-semibold">
+                  Description
+
+                  <span class="text-body-secondary fw-normal">(optional)</span>
+                </label>
+
+                {{ form.description }}
+
+                <div class="form-text">Add context, notes or the expected result.</div>
+
+                {% for error in form.description.errors %}
+                  <div class="text-danger small mt-1">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <!-- ================================================= -->
+              <!-- PRIORITY + DATE -->
+              <!-- ================================================= -->
+
+              <div class="row g-3 mb-4">
+                <!-- Priority -->
+
+                <div class="col-12 col-md-6">
+                  <label for="{{ form.priority.id_for_label }}" class="form-label fw-semibold">Priority</label>
+
+                  {{ form.priority }}
+
+                  <div class="form-text">How important is this task?</div>
+
+                  {% for error in form.priority.errors %}
+                    <div class="text-danger small mt-1">{{ error }}</div>
+                  {% endfor %}
+                </div>
+
+                <!-- Due date -->
+
+                <div class="col-12 col-md-6">
+                  <label for="{{ form.due_date.id_for_label }}" class="form-label fw-semibold">
+                    Due date
+
+                    <span class="text-body-secondary fw-normal">(optional)</span>
+                  </label>
+
+                  {{ form.due_date }}
+
+                  <div class="form-text">When should this task be finished?</div>
+
+                  {% for error in form.due_date.errors %}
+                    <div class="text-danger small mt-1">{{ error }}</div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- ================================================= -->
+              <!-- INFO -->
+              <!-- ================================================= -->
+
+              <div class="alert alert-primary border-0 mb-4">
+                <div class="d-flex gap-3">
+                  <i class="bi bi-lightbulb fs-5"></i>
+
+                  <div>
+                    <div class="fw-semibold mb-1">Keep it actionable</div>
+
+                    <div class="small">A good task describes something you can actually complete. You can break larger tasks into subtasks later.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ================================================= -->
+              <!-- ACTIONS -->
+              <!-- ================================================= -->
+
+              <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
+                <a href="{% url 'tasker:list' %}" class="btn btn-outline-secondary order-2 order-sm-1">Cancel</a>
+
+                <button type="submit" class="btn btn-primary order-1 order-sm-2">
+                  <i class="bi bi-plus-lg me-2"></i>
+
+                  Create task
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================= -->
+      <!-- SIDE PANEL -->
+      <!-- ================================================= -->
+
+      <div class="col-12 col-xl-3">
+        <div class="d-flex flex-column gap-3">
+          <!-- ================================================= -->
+          <!-- WHAT HAPPENS NEXT -->
+          <!-- ================================================= -->
+
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="bg-success-subtle text-success rounded-3 p-2"><i class="bi bi-arrow-right-circle fs-5"></i></span>
+
+                <h6 class="fw-bold mb-0">What happens next?</h6>
+              </div>
+
+              <div class="d-flex flex-column gap-3">
+                <div class="d-flex gap-3">
+                  <span class="badge rounded-pill text-bg-primary">1</span>
+
+                  <div>
+                    <div class="fw-semibold small">Create the task</div>
+
+                    <div class="text-body-secondary small">It will appear in your task list.</div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                  <span class="badge rounded-pill text-bg-primary">2</span>
+
+                  <div>
+                    <div class="fw-semibold small">Add subtasks</div>
+
+                    <div class="text-body-secondary small">Break large goals into smaller actions.</div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                  <span class="badge rounded-pill text-bg-primary">3</span>
+
+                  <div>
+                    <div class="fw-semibold small">Track progress</div>
+
+                    <div class="text-body-secondary small">Complete subtasks and watch your progress grow.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================= -->
+          <!-- TASK STRUCTURE -->
+          <!-- ================================================= -->
+
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <h6 class="fw-bold mb-3">Task structure</h6>
+
+              <div class="d-flex flex-column gap-3">
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-card-heading text-primary fs-5"></i>
+
+                  <div>
+                    <div class="fw-semibold small">Task</div>
+
+                    <div class="text-body-secondary small">The main goal you're working towards.</div>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-list-check text-success fs-5"></i>
+
+                  <div>
+                    <div class="fw-semibold small">Subtasks</div>
+
+                    <div class="text-body-secondary small">The individual actions required to finish it.</div>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-bar-chart text-info fs-5"></i>
+
+                  <div>
+                    <div class="fw-semibold small">Progress</div>
+
+                    <div class="text-body-secondary small">Automatically calculated from completed subtasks.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================= -->
+          <!-- TIP -->
+          <!-- ================================================= -->
+
+          <div class="card bg-body-tertiary border-0">
+            <div class="card-body p-4">
+              <div class="d-flex gap-3">
+                <i class="bi bi-stars text-warning fs-5"></i>
+
+                <div>
+                  <div class="fw-semibold small mb-1">Taskedo tip</div>
+
+                  <div class="small text-body-secondary">Don't try to put everything into one task. If it takes several actions, make them subtasks.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
