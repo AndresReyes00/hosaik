@@ -1,0 +1,121 @@
+{% extends '../base.html' %}
+
+{% block title %}
+  Nueva subtarea | Tasker
+{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-9 col-lg-7">
+        <!-- Progress -->
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <span class="badge text-bg-primary rounded-pill">Paso 2 de 2</span>
+
+          <span class="text-body-secondary small">Divide tu tarea en pequeños pasos</span>
+        </div>
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+          <div class="display-5 mb-3">🚀</div>
+
+          <h1 class="fw-bold mb-2">¡Vamos a darle vida a tu tarea!</h1>
+
+          <p class="text-body-secondary fs-5 mb-0">Crea tu primera subtarea y convierte ese objetivo en pasos fáciles de completar.</p>
+        </div>
+
+        <!-- Parent Task -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-3">🎯</div>
+
+              <div>
+                <div class="text-body-secondary small mb-1">Estás trabajando en</div>
+
+                <h5 class="fw-bold mb-1">{{ Task.title }}</h5>
+
+                {% if task.description %}
+                  <p class="text-body-secondary mb-0 small">{{ task.description|truncatechars:120 }}</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4 p-md-5">
+            <div class="mb-4">
+              <h4 class="fw-bold mb-1">✨ Tu primera subtarea</h4>
+
+              <p class="text-body-secondary mb-0">¿Cuál es el primer paso que necesitas completar?</p>
+            </div>
+
+            <form method="post">
+              {% csrf_token %}
+
+              <!-- Title -->
+              <div class="mb-4">
+                <label for="{{ form.title.id_for_label }}" class="form-label fw-semibold">¿Qué necesitas hacer?</label>
+
+                {{ form.title }}
+
+                {% if form.title.errors %}
+                  <div class="text-danger small mt-1">{{ form.title.errors }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Description -->
+              <div class="mb-4">
+                <label for="{{ form.description.id_for_label }}" class="form-label fw-semibold">
+                  Añade algunos detalles
+                  <span class="text-body-secondary fw-normal">(opcional)</span>
+                </label>
+
+                {{ form.description }}
+
+                {% if form.description.errors %}
+                  <div class="text-danger small mt-1">{{ form.description.errors }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Due date -->
+              <div class="mb-4">
+                <label for="{{ form.due_date.id_for_label }}" class="form-label fw-semibold">
+                  ¿Cuándo quieres terminarla?
+                  <span class="text-body-secondary fw-normal">(opcional)</span>
+                </label>
+
+                {{ form.due_date }}
+
+                <div class="form-text">⏰ Establecer una fecha te ayudará a mantener el ritmo.</div>
+
+                {% if form.due_date.errors %}
+                  <div class="text-danger small mt-1">{{ form.due_date.errors }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Actions -->
+              <div class="d-flex flex-column flex-sm-row gap-2">
+                <a href="{% url 'tasker:list' %}" class="btn btn-outline-secondary flex-grow-1">Cancelar</a>
+
+                <button type="submit" class="btn btn-primary flex-grow-1">
+                  <i class="bi bi-check2-circle me-1"></i>
+                  Crear subtarea
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Motivation -->
+        <div class="text-center mt-4">
+          <p class="text-body-secondary small mb-1">💡 Las grandes tareas se construyen paso a paso.</p>
+
+          <p class="text-body-secondary small mb-0">No tienes que hacerlo todo de una vez.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
