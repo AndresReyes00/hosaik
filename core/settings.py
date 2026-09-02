@@ -32,6 +32,7 @@ MY_APPS = [
     "my_apps.portafolios.apps.PortafoliosConfig",
     "my_apps.accounts.apps.AccountsConfig",
     "my_apps.tasker.apps.TaskerConfig",
+    "my_apps.mora.apps.MoraConfig",
 ]
 
 
