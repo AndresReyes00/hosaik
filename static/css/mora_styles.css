@@ -1,0 +1,59 @@
+:root {
+    --mora-pink: #e8b4c8;
+    --mora-purple: #9b7bb5;
+    --mora-dark: #2d1f2f;
+    --mora-cream: #fcf8f9;
+}
+
+/* =========================
+   BASE
+========================= */
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--mora-cream);
+}
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.mora-brand,
+.mora-title {
+    font-family: "DM Serif Display", serif;
+}
+
+.mora-brand {
+    color: var(--mora-purple) !important;
+}
+
+.mora-accent {
+    color: var(--mora-purple);
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.mora-btn {
+    background-color: var(--mora-purple);
+    border-color: var(--mora-purple);
+    color: #fff;
+}
+
+.mora-btn:hover {
+    background-color: var(--mora-dark);
+    border-color: var(--mora-dark);
+    color: #fff;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.mora-dark {
+    background-color: var(--mora-dark);
+}
